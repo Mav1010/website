@@ -1,0 +1,58 @@
+<div class="banner" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="banner-form-text">
+                    <div class="card mb-3 insurance-form-style">
+                        <div class="card-header"><h4>Podaj poniższe dane byśmy mogli przesłać Ci ofertę ubezpieczenia {{ insurance_type }}</h4></div>
+                        <div class="card-body">
+                            {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+
+                            <form id="insurance_form" action="" method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    <p>{{ field.label }}</p>
+                                    <p>{{ field }}</p>
+                                {% endfor %}
+                                <div class="mt-5 d-block">
+                                    <button id="submit-button" type="submit" class="btn btn-outline-dark btn-block w-100 font-weight-bold text-uppercase">Wyślij</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class=" banner-form-text">
+                    <div class="card text-white bg-secondary mb-3">
+                        <div class="card-header"><h2>Dlaczego warto zawrzeć ubezpieczenie {{ insurance_type }}</h2></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Secondary title</h5>
+                            <p class="card-text text-white">text dlaczego należy mieć ubezpieczenie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+{% load static %}
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Biuro ubezpieczeń Jolanta Dec. Nowa Ruda-Słupiec ul. Akacjowa." />
+    {% include 'includes/base_css_js_head.html' %}
+</head>
+
+<body>
+{% block body %}
+
+{% endblock %}
+
+<div class="cpy-right">
+    <p>© 2018 Insurance. All rights reserved | Design by
+        <a href="http://w3layouts.com"> W3layouts.</a>
+    </p>
+</div>
+
+{% block script %}
+
+{% endblock %}
+
+<script type="text/javascript" id="cookieinfo"
+        src="//cookieinfoscript.com/js/cookieinfo.min.js"
+        data-message='{% include "contact_forms/cookie_consent.html" %}'
+        data-font-size="0.8em"
+        data-linkmsg=""
+        data-close-text="OK!">
+</script>
+
+
+</body>
+</html>

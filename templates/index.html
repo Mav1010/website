@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Biuro Ubezpieczeń Jolanta Dec{% endblock %}
+
+{% block body %}
+
+    <!-- ==========NAVBAR========== -->
+    {% include 'snippets/navbar.html' %}
+    <!-- //==========NAVBAR========== -->
+
+    <!-- ==========BANNER========== -->
+    {% include 'snippets/home_banner.html' %}
+    <!-- //==========BANNER========== -->
+
+    <!-- ==========INSURANCE ABOUT========== -->
+    {% include 'snippets/about_insurance.html' %}
+    <!-- //==========INSURANCE ABOUT========== -->
+
+    <!-- ==========STATS========== -->
+    {% include 'snippets/stats.html' %}
+    <!-- //==========STATS========== -->
+
+    <!-- ==========ADDED VALUE========== -->
+{#    {% include 'snippets/added_value.html' %}#}
+    <!--// ==========ADDED VALUE========== -->
+
+    <!-- ==========TESTIMONIALS========== -->
+{#    {% include 'snippets/testimonials.html' %}#}
+    <!-- //==========TESTIMONIALS========== -->
+
+    <!-- ==========TESTIMONIALS========== -->
+    {% include 'snippets/contacts.html' %}
+    <!-- //==========TESTIMONIALS========== -->
+
+    <!-- ==========CSS JS Footer========== -->
+    {% include 'includes/base_css_js_footer.html' %}
+    <!-- //==========CSS JS Footer========== -->
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $('#general-contact-form').on('submit', function(event){
+            var data = $(this).serializeArray();
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'ajax_send_contact_form' %}",
+                data: data,
+                success: function (response) {
+                    if(response['error']) {
+                        $("#errors-container").html('');
+                        $.each(response['error'], function (index, element) {
+                            $("#errors-container").append("<div class='alert alert-danger'>" + element + "</div>");
+                        });
+                        {#$("#errors-container").addClass('alert alert-danger').html(response['error']['email']).html(response['error']['phone']);#}
+                    }
+                    if(response['success']) {
+                        $("#errors-container").hide();
+                        $('#general-contact-form').fadeOut(300);
+                        $('#message-sent').delay(300).fadeIn(1000);
+                    }
+                }
+            })
+        });
+    </script>
+{% endblock %}

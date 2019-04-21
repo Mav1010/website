@@ -1,0 +1,41 @@
+Nowy formularz {{ data.type }} od {{ data.first_name }} {{ data.last_name }}:
+<br>
+<br>
+{% if data.general %}
+    <p>Wiadomość:</p>
+    <p>{{ data.message }}</p>
+    <br>
+    <p>Dane kontaktowe:</p>
+    {% if data.phone %}
+        <p>Telefon: {{ data.phone }}</p>
+    {% endif %}
+    <p>Email: {{ data.email }}</p>
+
+{% else %}
+    Przesłane dane:
+    <!-- OC/AC -->
+    {% if data.type == 'OC/AC' %}
+        <p>Marka: {{ data.car_brand }}</p>
+        <p>Model: {{ data.car_model }}</p>
+        <p>Przebieg: {{ data.car_mileage }}</p>
+        <p>Zniżki: {{ data.car_discounts }}</p>
+        <p>Silnik: {{ data.car_engine_type }}</p>
+        <p>Pojemność silnika: {{ data.car_engine_size }}</p>
+
+        <!-- Dom/Mieszkanie -->
+    {% elif data.type == 2 %}
+
+        <!-- Podróżne -->
+    {% elif data.type == 3 %}
+
+        <!-- NNW/Na Życie -->
+    {% elif data.type == 4 %}
+
+        <!-- Inne -->
+    {% elif data.type == 5 %}
+
+    {% endif %}
+{% endif %}
+<br>
+Pozdrawiam,<br>
+Twoja strona internetowa

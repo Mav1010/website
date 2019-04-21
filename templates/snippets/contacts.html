@@ -1,0 +1,99 @@
+<div class="contact-wthree" id="contact">
+    <div class="container py-sm-5">
+        <div class="title-section py-4">
+            <h3 class="main-title-agile">Skontaktuj się z nami</h3>
+            <h5 class="text-center">Nowa Ruda-Słupiec ul. Akacjowa 13 </h5>
+            <h5 class="text-center">tel: 607 650 767</h5>
+        </div>
+        <div class="row py-lg-5 py-4">
+            <div class="col-md-6">
+                <div class="agile-contact-top">
+                    <div class="map-responsive">
+                        <p><iframe src="https://www.google.com/maps/embed?pb={{ map_key }}" width="550" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+            <div class="col-md-6 mt-lg-0 mt-5">
+                <div id="errors-container"></div>
+                <!-- GENERAL CONTACT FORM -->
+                <div class="register-top1">
+                    <div id="message-sent" style="display: none">
+                        <h3 class="modal-title text-success text-center" id="modalLabel">
+                            <i class="fa fa-check-circle pb-4" aria-hidden="true" style="font-size: 200%;"></i>
+                            <br>
+                            Twoja wiadomość zostala wysłana. Skontaktujemy się z Tobą wkrótce!
+                        </h3>
+                    </div>
+                    <form id="general-contact-form" action="#" method="post" class="register-wthree">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <label>
+                                        Imię
+                                    </label>
+                                    {{ form.first_name }}
+                                </div>
+
+                                <div class="col-md-6 mt-md-0 mt-4">
+                                    <label>
+                                        Nazwisko
+                                    </label>
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>
+                                        Telefon
+                                    </label>
+                                    {{ form.phone }}
+                                </div>
+                                <div class="col-md-6 mt-md-0 mt-4">
+                                    <label>
+                                        Email
+                                    </label>
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label id="label-message">
+                                        Twoja wiadomość
+                                    </label>
+                                    {{ form.message }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form.rodo_consent }}
+                                    <label style="font-size: 0.8em">
+                                        Zapoznałem się z <span data-toggle="tooltip" data-placement="top" title="{% include 'contact_forms/rodo_consent.html' %}"
+                                    style="text-decoration-line: underline">
+                                        informacją o administratorze i przetwarzaniu danych.
+                                    </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <button id="submit-button" type="submit" class="btn btn-agile btn-block w-100 font-weight-bold text-uppercase">Wyślij</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--  //register form grid ends here -->
+            </div>
+        </div>
+    </div>
+</div>
