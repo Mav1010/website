@@ -116,7 +116,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR,]
-STATIC_ROOT = os.path.join(BASE_DIR, "assets")
+# STATIC_ROOT = os.path.join(BASE_DIR, "assets")
+
+MEDIA_URL = '/media/'
+ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(ENV_PATH, '../public/static/')
+MEDIA_ROOT = os.path.join(ENV_PATH, '../public/media/')
 
 # Always use IPython for shell_plus
 SHELL_PLUS = "ipython"
