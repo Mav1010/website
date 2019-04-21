@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.contrib import messages
+from django.core.mail import send_mail
+
 from django.shortcuts import redirect
-from django.template.loader import get_template
+from django.template.loader import render_to_string
 from django.views.generic import FormView
 
 from . import choices as choices_forms
 from .forms import OCACForm
 from .models import InsuranceContact
-
-from contact_forms.utils import send_email_sendgrid
 
 
 class OCACContactCreate(FormView):
@@ -45,17 +45,15 @@ class OCACContactCreate(FormView):
                                             year=year,
                                             )
         except Exception as error:
-            send_email_sendgrid('error@website.pl', settings.ADMIN_RECIPIENT_EMAIL, 'Błąd w formularzu OC/AC',
-                                'text/html', '{}: {}'.format(error, type(error)))
+            send_mail('Błąd w formularzu OC/AC', '{}: {}'.format(error, type(error)), 'error@website.pl', settings.ADMIN_RECIPIENT_EMAIL)
 
         # send email with notification:
         subject = 'Formularz OC/AC od: {} {}'.format(first_name, last_name)
         context = {
             'data': data,
         }
-        message = get_template('contact_forms/email_template.html').render(context)
-        send_email_sendgrid(email, settings.AGENT_RECIPIENT_EMAIL, subject,
-                            'text/html', message)
+        message = render_to_string('contact_forms/email_template.html')
+        send_mail(subject, message, settings.AGENT_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
 
         messages.success(self.request, 'Dziękujemy za przesłanie formularza. Skontaktujemy się z Tobą wkrótce.')
         return redirect('contact_forms:oc_ac_create')

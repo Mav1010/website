@@ -90,8 +90,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Sendgrid settings
-SENDGRID_API_KEY = config('SENDGRID_API_KEY')
 AGENT_RECIPIENT_EMAIL = 'maciek.dec@wp.pl'
 ADMIN_RECIPIENT_EMAIL = 'maciek.dec@gmail.com'
 

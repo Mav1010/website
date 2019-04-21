@@ -1,12 +1,13 @@
 from django.conf import settings
+from django.core.mail import send_mail
+
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
-from django.template.loader import get_template
+from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 
 from contact_forms.forms import GeneralContactForm
 from contact_forms.models import GeneralContact
-from contact_forms.utils import send_email_sendgrid
 
 
 def home_page(request):
@@ -43,17 +44,17 @@ def ajax_send_contact_form(request):
                                               phone=phone,
                                               message=message)
             except Exception as error:
-                send_email_sendgrid('error@website.pl', settings.ADMIN_RECIPIENT_EMAIL, 'Error in General Form',
-                                    'text/html', '{}: {}'.format(error, type(error)))
+                send_mail('Error in General Form', '{}: {}'.format(error, type(error)), 'error@website.pl',
+                          settings.ADMIN_RECIPIENT_EMAIL)
 
             # send email with notification:
             subject = 'Formularz kontaktowy od: {} {}'.format(first_name, last_name)
             context = {
                 'data': data
             }
-            message_body = get_template('contact_forms/email_template.html').render(context)
-            send_email_sendgrid(email, settings.AGENT_RECIPIENT_EMAIL, subject,
-                                'text/html', message_body)
+            message_body = render_to_string('contact_forms/email_template.html')
+            send_mail(subject, message_body, settings.AGENT_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
+
             return JsonResponse({'success': True})
 
         else:
