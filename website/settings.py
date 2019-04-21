@@ -90,10 +90,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AGENT_RECIPIENT_EMAIL = 'maciek.dec@wp.pl'
-ADMIN_RECIPIENT_EMAIL = 'maciek.dec@gmail.com'
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -126,6 +122,18 @@ SHELL_PLUS = "ipython"
 
 # google maps data
 MAP_KEY = '!1m18!1m12!1m3!1d1028.2679243448804!2d16.551225772883335!3d50.542515600057655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470e3f75370e097f%3A0xc20524d67ea1e3d5!2sAkacjowa+13%2C+57-400+Nowa+Ruda%2C+Polska!5e0!3m2!1spl!2scz!4v1550919863474'
+
+# email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+
+AGENT_RECIPIENT_EMAIL = config('AGENT_RECIPIENT_EMAIL')
+ADMIN_RECIPIENT_EMAIL = config('ADMIN_RECIPIENT_EMAIL')
+
 
 # use settings_local
 if DEBUG:

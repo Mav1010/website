@@ -44,7 +44,7 @@ def ajax_send_contact_form(request):
                                               phone=phone,
                                               message=message)
             except Exception as error:
-                send_mail('Error in General Form', '{}: {}'.format(error, type(error)), 'error@website.pl',
+                send_mail('Error in General Form', '{}: {}'.format(error, type(error)), settings.ADMIN_RECIPIENT_EMAIL,
                           [settings.ADMIN_RECIPIENT_EMAIL])
 
             # send email with notification:
@@ -53,7 +53,7 @@ def ajax_send_contact_form(request):
                 'data': data
             }
             message_body = render_to_string('contact_forms/email_template.html')
-            send_mail(subject, message_body, settings.AGENT_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
+            send_mail(subject, message_body, settings.ADMIN_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
 
             return JsonResponse({'success': True})
 

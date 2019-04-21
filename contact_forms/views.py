@@ -45,7 +45,7 @@ class OCACContactCreate(FormView):
                                             year=year,
                                             )
         except Exception as error:
-            send_mail('Błąd w formularzu OC/AC', '{}: {}'.format(error, type(error)), 'error@website.pl', [settings.ADMIN_RECIPIENT_EMAIL])
+            send_mail('Błąd w formularzu OC/AC', '{}: {}'.format(error, type(error)), settings.ADMIN_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
 
         # send email with notification:
         subject = 'Formularz OC/AC od: {} {}'.format(first_name, last_name)
@@ -53,7 +53,7 @@ class OCACContactCreate(FormView):
             'data': data,
         }
         message = render_to_string('contact_forms/email_template.html')
-        send_mail(subject, message, settings.AGENT_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
+        send_mail(subject, message, settings.ADMIN_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
 
         messages.success(self.request, 'Dziękujemy za przesłanie formularza. Skontaktujemy się z Tobą wkrótce.')
         return redirect('contact_forms:oc_ac_create')
