@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.core.mail.message import EmailMessage
 
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -52,8 +53,15 @@ class OCACContactCreate(FormView):
         context = {
             'data': data,
         }
-        message = render_to_string('contact_forms/email_template.html')
-        send_mail(subject, message, settings.ADMIN_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
+        message = render_to_string('contact_forms/email_template.html', context=data)
+        mail = EmailMessage(
+            subject,
+            message,
+            settings.ADMIN_RECIPIENT_EMAIL,
+            [settings.AGENT_RECIPIENT_EMAIL],
+            [settings.ADMIN_RECIPIENT_EMAIL]
+        )
+        mail.send()
 
         messages.success(self.request, 'Dziękujemy za przesłanie formularza. Skontaktujemy się z Tobą wkrótce.')
         return redirect('contact_forms:oc_ac_create')

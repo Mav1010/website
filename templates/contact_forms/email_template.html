@@ -1,26 +1,25 @@
 Nowy formularz {{ data.type }} od {{ data.first_name }} {{ data.last_name }}:
-<br>
-<br>
+
 {% if data.general %}
-    <p>Wiadomość:</p>
-    <p>{{ data.message }}</p>
-    <br>
-    <p>Dane kontaktowe:</p>
+Wiadomość:
+    {{ data.message }}
+
+Dane kontaktowe:
     {% if data.phone %}
-        <p>Telefon: {{ data.phone }}</p>
+Telefon: {{ data.phone }}
     {% endif %}
-    <p>Email: {{ data.email }}</p>
+Email: {{ data.email }}
 
 {% else %}
-    Przesłane dane:
+Przesłane dane:
     <!-- OC/AC -->
     {% if data.type == 'OC/AC' %}
-        <p>Marka: {{ data.car_brand }}</p>
-        <p>Model: {{ data.car_model }}</p>
-        <p>Przebieg: {{ data.car_mileage }}</p>
-        <p>Zniżki: {{ data.car_discounts }}</p>
-        <p>Silnik: {{ data.car_engine_type }}</p>
-        <p>Pojemność silnika: {{ data.car_engine_size }}</p>
+Marka: {{ data.car_brand }}
+Model: {{ data.car_model }}
+Przebieg: {{ data.car_mileage }}
+Zniżki: {{ data.car_discounts }}
+Silnik: {{ data.car_engine_type }}
+Pojemność silnika: {{ data.car_engine_size }}
 
         <!-- Dom/Mieszkanie -->
     {% elif data.type == 2 %}
@@ -36,6 +35,6 @@ Nowy formularz {{ data.type }} od {{ data.first_name }} {{ data.last_name }}:
 
     {% endif %}
 {% endif %}
-<br>
-Pozdrawiam,<br>
+
+Pozdrawiam,
 Twoja strona internetowa

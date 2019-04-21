@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.mail import send_mail
+from django.core.mail.message import EmailMessage
 
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
@@ -52,8 +53,16 @@ def ajax_send_contact_form(request):
             context = {
                 'data': data
             }
-            message_body = render_to_string('contact_forms/email_template.html')
-            send_mail(subject, message_body, settings.ADMIN_RECIPIENT_EMAIL, [settings.AGENT_RECIPIENT_EMAIL])
+            message_body = render_to_string('contact_forms/email_template.html', context=context)
+
+            mail = EmailMessage(
+                subject,
+                message_body,
+                settings.ADMIN_RECIPIENT_EMAIL,
+                [settings.AGENT_RECIPIENT_EMAIL],
+                [settings.ADMIN_RECIPIENT_EMAIL]
+            )
+            mail.send()
 
             return JsonResponse({'success': True})
 
