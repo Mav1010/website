@@ -45,7 +45,7 @@ def ajax_send_contact_form(request):
                                               message=message)
             except Exception as error:
                 send_mail('Error in General Form', '{}: {}'.format(error, type(error)), 'error@website.pl',
-                          settings.ADMIN_RECIPIENT_EMAIL)
+                          [settings.ADMIN_RECIPIENT_EMAIL])
 
             # send email with notification:
             subject = 'Formularz kontaktowy od: {} {}'.format(first_name, last_name)
