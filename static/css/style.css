@@ -1269,7 +1269,7 @@ span.icon_g_plus {
 @media screen and (max-width: 991px) {
 	.navbar-light {
 		padding: 1em 2em;
-		border-radius: 10px;
+		border-radius: 50px;
 	}
 
 	.timer {
