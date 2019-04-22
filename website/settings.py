@@ -39,7 +39,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware', # this should be the last item
+#    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware', # this should be the last item
 ]
 
 
@@ -140,13 +140,13 @@ ADMIN_RECIPIENT_EMAIL = config('ADMIN_RECIPIENT_EMAIL')
 
 # Rollbar settings
 
-ROLLBAR = {
-    'access_token': config('ROLLBAR_TOKEN'),
-    'environment': 'development' if DEBUG else 'production',
-    'root': BASE_DIR,
-}
-import rollbar
-rollbar.init(**ROLLBAR)
+# ROLLBAR = {
+#     'access_token': config('ROLLBAR_TOKEN'),
+#     'environment': 'development' if DEBUG else 'production',
+#     'root': BASE_DIR,
+# }
+# import rollbar
+# rollbar.init(**ROLLBAR)
 
 
 # use settings_local
