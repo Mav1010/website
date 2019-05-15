@@ -5,7 +5,7 @@ from invoke.exceptions import UnexpectedExit
 
 SSH_USER_WEBSITE = 'Mydevil10@s2.mydevil.net'
 GIT_MASTER_BRANCH_NAME = 'master'
-DOMAIN = 'jd-ubezpieczenia'
+DOMAIN = 'jd-ubezpieczenia.pl'
 
 
 def deploy_production():
@@ -15,7 +15,7 @@ def deploy_production():
     # activate the virtual environment
     with c.prefix('source ~/.virtualenvs/website/bin/activate'):
         # move to /app/ directory where the app lives and GIT is initiated
-        with c.cd('domains/jd-ubezpieczenia/public_python'):
+        with c.cd('domains/jd-ubezpieczenia.pl/public_python'):
 
             # check the current GIT branch name
             current_branch = c.run('git rev-parse --abbrev-ref HEAD')
